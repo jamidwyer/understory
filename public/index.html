@@ -91,6 +91,8 @@
           {"href":"#button","label":"Button"},
           {"href":"#link-button","label":"Link Button"},
           {"href":"#input","label":"Input"},
+          {"href":"#password-input","label":"Password Input"},
+          {"href":"#phone-input","label":"Phone Input"},
           {"href":"#image","label":"Image"},
           {"href":"#card","label":"Card"},
           {"href":"#card-container","label":"Card Container"},
@@ -144,32 +146,51 @@
 
         <section id="input">
           <h2>&lt;uwc-input&gt;</h2>
-          <p class="description">Text input with built-in HTML5 validation and an optional password show/hide toggle.</p>
+          <p class="description">Text input with built-in HTML5 validation. Built to be subclassed — see Password Input and Phone Input below.</p>
 
           <div class="example">
             <h3>Validated fields</h3>
             <div class="example-render" style="flex-direction: column; align-items: stretch; max-width: 20rem;">
               <uwc-input label="Email" type="email" placeholder="you@example.com" required error-message="Enter a valid email"></uwc-input>
-              <uwc-input label="Password" type="password" placeholder="At least 8 characters" required minlength="8"></uwc-input>
             </div>
             <pre class="snippet"><code>&lt;uwc-input label="Email" type="email" placeholder="you@example.com" required
-  error-message="Enter a valid email"&gt;&lt;/uwc-input&gt;
-&lt;uwc-input label="Password" type="password" placeholder="At least 8 characters"
-  required minlength="8"&gt;&lt;/uwc-input&gt;</code></pre>
+  error-message="Enter a valid email"&gt;&lt;/uwc-input&gt;</code></pre>
           </div>
 
           <div class="example">
             <h3>Validation inferred from <code>autocomplete</code></h3>
             <div class="example-render" style="flex-direction: column; align-items: stretch; max-width: 20rem;">
-              <uwc-input label="Phone" autocomplete="tel" placeholder="(555) 123-4567" required></uwc-input>
               <uwc-input label="Card number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required></uwc-input>
-              <uwc-input label="New password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8"></uwc-input>
             </div>
             <pre class="snippet"><code>&lt;!-- no "type" set: inferred from autocomplete --&gt;
-&lt;uwc-input label="Phone" autocomplete="tel" placeholder="(555) 123-4567" required&gt;&lt;/uwc-input&gt;
-&lt;uwc-input label="Card number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required&gt;&lt;/uwc-input&gt;
-&lt;uwc-input label="New password" autocomplete="new-password" placeholder="At least 8 characters"
-  required minlength="8"&gt;&lt;/uwc-input&gt;</code></pre>
+&lt;uwc-input label="Card number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required&gt;&lt;/uwc-input&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="password-input">
+          <h2>&lt;uwc-password-input&gt;</h2>
+          <p class="description">Extends <code>&lt;uwc-input&gt;</code>: always <code>type="password"</code>, with an eyeball button inside the field to show/hide the value.</p>
+
+          <div class="example">
+            <h3>Standalone example</h3>
+            <div class="example-render" style="flex-direction: column; align-items: stretch; max-width: 20rem;">
+              <uwc-password-input label="Password" placeholder="At least 8 characters" required minlength="8"></uwc-password-input>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-password-input label="Password" placeholder="At least 8 characters"
+  required minlength="8"&gt;&lt;/uwc-password-input&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="phone-input">
+          <h2>&lt;uwc-phone-input&gt;</h2>
+          <p class="description">Extends <code>&lt;uwc-input&gt;</code>: defaults to <code>type="tel"</code> and <code>autocomplete="tel"</code>, bringing in the same phone-number pattern and numeric keyboard hint as <code>&lt;uwc-input autocomplete="tel"&gt;</code>.</p>
+
+          <div class="example">
+            <h3>Standalone example</h3>
+            <div class="example-render" style="flex-direction: column; align-items: stretch; max-width: 20rem;">
+              <uwc-phone-input label="Phone" placeholder="(555) 123-4567" required></uwc-phone-input>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-phone-input label="Phone" placeholder="(555) 123-4567" required&gt;&lt;/uwc-phone-input&gt;</code></pre>
           </div>
         </section>
 
