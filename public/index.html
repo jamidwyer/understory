@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Understory — simple-components catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: #1a1a1a;
+      }
+      .layout {
+        display: flex;
+        flex: 1;
+      }
+      main {
+        flex: 1;
+        padding: 2rem;
+        max-width: 60rem;
+      }
+      section {
+        margin-bottom: 3rem;
+      }
+      section h2 {
+        font-size: 1.3rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.4rem;
+      }
+      section p.description {
+        color: #555;
+        max-width: 42rem;
+      }
+      .example {
+        margin-bottom: 1.5rem;
+      }
+      .example h3 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #888;
+        margin: 0 0 0.6rem;
+      }
+      .example-render {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 1.25rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        background: #fafafa;
+        margin-bottom: 0.5rem;
+      }
+      pre.snippet {
+        margin: 0;
+        padding: 0.75rem 1rem;
+        background: #1e1e1e;
+        color: #e6e6e6;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        line-height: 1.5;
+        overflow-x: auto;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <uwc-universal-nav logged-in>
+      <strong slot="branding">Understory</strong>
+      <uwc-dropdown-menu
+        slot="user"
+        label="Account"
+        items='[
+          {"href":"#profile","label":"Profile","description":"View and edit your profile"},
+          {"href":"#settings","label":"Settings","description":"Manage your preferences"},
+          {"href":"#logout","label":"Log out","description":"Sign out of your account"}
+        ]'
+      ></uwc-dropdown-menu>
+    </uwc-universal-nav>
+
+    <div class="layout">
+      <uwc-sidebar-menu
+        id="nav"
+        links='[
+          {"href":"#button","label":"Button"},
+          {"href":"#link-button","label":"Link Button"},
+          {"href":"#input","label":"Input"},
+          {"href":"#image","label":"Image"},
+          {"href":"#card","label":"Card"},
+          {"href":"#card-container","label":"Card Container"},
+          {"href":"#dropdown-menu","label":"Dropdown Menu"},
+          {"href":"#sidebar-menu","label":"Sidebar Menu"},
+          {"href":"#universal-nav","label":"Universal Nav"}
+        ]'
+        selected="#button"
+      ></uwc-sidebar-menu>
+
+      <main>
+        <h1>Understory</h1>
+        <p class="description">A catalog of every component in <code>@jamidwyer/simple-components</code> — live examples and the HTML that produced them.</p>
+
+        <section id="button">
+          <h2>&lt;uwc-button&gt;</h2>
+          <p class="description">Button with three variants, or a disabled state.</p>
+
+          <div class="example">
+            <h3>Variants</h3>
+            <div class="example-render">
+              <uwc-button variant="primary">Primary</uwc-button>
+              <uwc-button variant="secondary">Secondary</uwc-button>
+              <uwc-button variant="danger">Danger</uwc-button>
+              <uwc-button variant="primary" disabled>Disabled</uwc-button>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-button variant="primary"&gt;Primary&lt;/uwc-button&gt;
+&lt;uwc-button variant="secondary"&gt;Secondary&lt;/uwc-button&gt;
+&lt;uwc-button variant="danger"&gt;Danger&lt;/uwc-button&gt;
+&lt;uwc-button variant="primary" disabled&gt;Disabled&lt;/uwc-button&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="link-button">
+          <h2>&lt;uwc-link-button&gt;</h2>
+          <p class="description">Styled identically to <code>&lt;uwc-button&gt;</code>, but renders a real <code>&lt;a href&gt;</code> for navigation.</p>
+
+          <div class="example">
+            <h3>Variants</h3>
+            <div class="example-render">
+              <uwc-link-button variant="primary" href="https://example.com" target="_blank" rel="noopener">Primary link</uwc-link-button>
+              <uwc-link-button variant="secondary" href="https://example.com" target="_blank" rel="noopener">Secondary link</uwc-link-button>
+              <uwc-link-button variant="primary" disabled>Disabled link</uwc-link-button>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-link-button variant="primary" href="https://example.com" target="_blank" rel="noopener"&gt;
+  Primary link
+&lt;/uwc-link-button&gt;
+&lt;uwc-link-button variant="primary" disabled&gt;Disabled link&lt;/uwc-link-button&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="input">
+          <h2>&lt;uwc-input&gt;</h2>
+          <p class="description">Text input with built-in HTML5 validation and an optional password show/hide toggle.</p>
+
+          <div class="example">
+            <h3>Validated fields</h3>
+            <div class="example-render" style="flex-direction: column; align-items: stretch; max-width: 20rem;">
+              <uwc-input label="Email" type="email" placeholder="you@example.com" required error-message="Enter a valid email"></uwc-input>
+              <uwc-input label="Password" type="password" placeholder="At least 8 characters" required minlength="8"></uwc-input>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-input label="Email" type="email" placeholder="you@example.com" required
+  error-message="Enter a valid email"&gt;&lt;/uwc-input&gt;
+&lt;uwc-input label="Password" type="password" placeholder="At least 8 characters"
+  required minlength="8"&gt;&lt;/uwc-input&gt;</code></pre>
+          </div>
+
+          <div class="example">
+            <h3>Validation inferred from <code>autocomplete</code></h3>
+            <div class="example-render" style="flex-direction: column; align-items: stretch; max-width: 20rem;">
+              <uwc-input label="Phone" autocomplete="tel" placeholder="(555) 123-4567" required></uwc-input>
+              <uwc-input label="Card number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required></uwc-input>
+              <uwc-input label="New password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8"></uwc-input>
+            </div>
+            <pre class="snippet"><code>&lt;!-- no "type" set: inferred from autocomplete --&gt;
+&lt;uwc-input label="Phone" autocomplete="tel" placeholder="(555) 123-4567" required&gt;&lt;/uwc-input&gt;
+&lt;uwc-input label="Card number" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required&gt;&lt;/uwc-input&gt;
+&lt;uwc-input label="New password" autocomplete="new-password" placeholder="At least 8 characters"
+  required minlength="8"&gt;&lt;/uwc-input&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="image">
+          <h2>&lt;uwc-image&gt;</h2>
+          <p class="description">Loads any source image into a fixed width/height box without distorting it — cropped (<code>cover</code>) or letterboxed (<code>contain</code>).</p>
+
+          <div class="example">
+            <h3><code>fit="cover"</code> vs <code>fit="contain"</code></h3>
+            <div class="example-render">
+              <uwc-image src="https://picsum.photos/id/1015/1200/400" alt="Wide landscape, cover" width="160" height="160"></uwc-image>
+              <uwc-image src="https://picsum.photos/id/1015/1200/400" alt="Wide landscape, contain" width="160" height="160" fit="contain"></uwc-image>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-image src="/landscape.jpg" alt="Wide landscape" width="160" height="160"&gt;&lt;/uwc-image&gt;
+&lt;uwc-image src="/landscape.jpg" alt="Wide landscape" width="160" height="160" fit="contain"&gt;&lt;/uwc-image&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="card">
+          <h2>&lt;uwc-card&gt;</h2>
+          <p class="description">Content card with an optional full-bleed image, a fixed height, and heading/subtitle text that clamps with an ellipsis rather than overflowing.</p>
+
+          <div class="example">
+            <h3>With image, and overflowing text</h3>
+            <div class="example-render">
+              <uwc-card
+                heading="Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore"
+                subtitle="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident"
+                image="https://picsum.photos/seed/understory-card/400/200"
+                image-alt=""
+              ></uwc-card>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-card
+  heading="Lorem ipsum dolor sit amet consectetur adipiscing elit..."
+  subtitle="Duis aute irure dolor in reprehenderit in voluptate velit esse..."
+  image="/photo.jpg"
+&gt;&lt;/uwc-card&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="card-container">
+          <h2>&lt;uwc-card-container&gt;</h2>
+          <p class="description">Lays out cards in a flex row that wraps: cards grow to fill the available width, wrapping once a card would shrink past its own <code>min-width</code>.</p>
+
+          <div class="example">
+            <h3>Three cards, wrapping</h3>
+            <uwc-card-container gap="1rem">
+              <uwc-card heading="Lorem ipsum dolor" subtitle="Sit amet consectetur adipiscing elit" image="https://picsum.photos/seed/lorem-1/400/200" image-alt="" min-width="12rem"></uwc-card>
+              <uwc-card heading="Sed do eiusmod" subtitle="Tempor incididunt ut labore et dolore" image="https://picsum.photos/seed/lorem-2/400/200" image-alt="" min-width="12rem"></uwc-card>
+              <uwc-card heading="Ut enim ad minim" subtitle="Veniam quis nostrud exercitation ullamco" image="https://picsum.photos/seed/lorem-3/400/200" image-alt="" min-width="12rem"></uwc-card>
+            </uwc-card-container>
+            <pre class="snippet"><code>&lt;uwc-card-container gap="1rem"&gt;
+  &lt;uwc-card heading="Lorem ipsum dolor" subtitle="Sit amet..." image="/1.jpg" min-width="12rem"&gt;&lt;/uwc-card&gt;
+  &lt;uwc-card heading="Sed do eiusmod" subtitle="Tempor incididunt..." image="/2.jpg" min-width="12rem"&gt;&lt;/uwc-card&gt;
+  &lt;uwc-card heading="Ut enim ad minim" subtitle="Veniam quis..." image="/3.jpg" min-width="12rem"&gt;&lt;/uwc-card&gt;
+&lt;/uwc-card-container&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="dropdown-menu">
+          <h2>&lt;uwc-dropdown-menu&gt;</h2>
+          <p class="description">Button that toggles a panel of links, each with an optional description. Closes on outside click, <code>Escape</code>, or after picking a link.</p>
+
+          <div class="example">
+            <h3>Resources menu</h3>
+            <div class="example-render">
+              <uwc-dropdown-menu
+                label="Resources"
+                items='[
+                  {"href":"#docs","label":"Docs","description":"Guides and API reference"},
+                  {"href":"#support","label":"Support","description":"Get help from the team"}
+                ]'
+              ></uwc-dropdown-menu>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-dropdown-menu
+  label="Resources"
+  items='[
+    {"href":"/docs","label":"Docs","description":"Guides and API reference"},
+    {"href":"/support","label":"Support","description":"Get help from the team"}
+  ]'
+&gt;&lt;/uwc-dropdown-menu&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="sidebar-menu">
+          <h2>&lt;uwc-sidebar-menu&gt;</h2>
+          <p class="description">Vertical navigation menu that highlights the currently selected link. This page's own left sidebar is one.</p>
+
+          <div class="example">
+            <h3>Standalone example</h3>
+            <div class="example-render">
+              <uwc-sidebar-menu
+                links='[{"href":"#a","label":"Overview"},{"href":"#b","label":"Getting started"},{"href":"#c","label":"API reference"}]'
+                selected="#b"
+              ></uwc-sidebar-menu>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-sidebar-menu
+  links='[{"href":"/overview","label":"Overview"},{"href":"/start","label":"Getting started"}]'
+  selected="/start"
+&gt;&lt;/uwc-sidebar-menu&gt;</code></pre>
+          </div>
+        </section>
+
+        <section id="universal-nav">
+          <h2>&lt;uwc-universal-nav&gt;</h2>
+          <p class="description">Full-width top bar with 20px padding: a flex row with <code>branding</code> and <code>user</code>/<code>login</code> named slots, justified space-between and centered. This page's own header is one. The <code>logged-in</code> attribute switches between the two: logged in shows the <code>user</code> slot, logged out shows the <code>login</code> slot (falling back to a default "Log in" button if none is given).</p>
+
+          <div class="example">
+            <h3>Logged in</h3>
+            <div class="example-render" style="padding: 0;">
+              <uwc-universal-nav logged-in style="border: 1px solid #eee; border-radius: 8px;">
+                <strong slot="branding">Acme</strong>
+                <uwc-button slot="user" variant="secondary">Sign out</uwc-button>
+              </uwc-universal-nav>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-universal-nav logged-in&gt;
+  &lt;strong slot="branding"&gt;Acme&lt;/strong&gt;
+  &lt;uwc-button slot="user" variant="secondary"&gt;Sign out&lt;/uwc-button&gt;
+&lt;/uwc-universal-nav&gt;</code></pre>
+          </div>
+
+          <div class="example">
+            <h3>Logged out</h3>
+            <div class="example-render" style="padding: 0;">
+              <uwc-universal-nav style="border: 1px solid #eee; border-radius: 8px;">
+                <strong slot="branding">Acme</strong>
+              </uwc-universal-nav>
+            </div>
+            <pre class="snippet"><code>&lt;uwc-universal-nav&gt;
+  &lt;strong slot="branding"&gt;Acme&lt;/strong&gt;
+  &lt;!-- no user/login content given: falls back to a default "Log in" button --&gt;
+&lt;/uwc-universal-nav&gt;</code></pre>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/vendor/understory-web-components.js"></script>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
